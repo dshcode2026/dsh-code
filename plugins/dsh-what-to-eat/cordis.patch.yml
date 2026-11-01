@@ -1,0 +1,6 @@
+# 今日菜单的 bundle 层：把 Host 半边挂进配置树。
+# entry id 必须与包名一致（商城预检按 entryId 比对），且 id 行不能写行尾注释。
+- insert:
+    - id: dsh-what-to-eat
+      name: 'dsh-what-to-eat'
+      config: {}

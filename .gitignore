@@ -1,7 +1,10 @@
-﻿node_modules/
+node_modules/
 dist/
 build/
 *.log
 .env
 .DS_Store
 Thumbs.db
+
+# 本地验证用的临时目录（临时 DSH_HOME、离屏夹具、截图、一次性探针脚本）
+.tmp/

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="今日菜单">
+  <defs>
+    <linearGradient id="tm-bowl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f1e7"/>
+      <stop offset="1" stop-color="#ded3bf"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1f6f5c"/>
+  <path d="M30 8l5.2 15.4H41L32.8 34h5.6L24 52l4.2-14.2H23L30 8z" fill="#ffd166" opacity="0.95"/>
+  <path d="M12 36h40c0 9.4-7.6 17-17 17h-6c-9.4 0-17-7.6-17-17z" fill="url(#tm-bowl)"/>
+  <path d="M12 36h40" stroke="#b9ab93" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8 36h48" stroke="#f6f1e7" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="24" cy="30" r="2.2" fill="#e0764f"/>
+  <circle cx="32" cy="28" r="2.2" fill="#7cb342"/>
+  <circle cx="40" cy="30" r="2.2" fill="#e0b44f"/>
+</svg>

@@ -1,0 +1,77 @@
+{
+  "name": "dsh-what-to-eat",
+  "version": "0.1.1",
+  "description": "今日菜单：按你配置的时间，从本地家常菜库里加权随机抽一道菜推给你。右侧栏常驻面板可查、可编辑、可导入导出；会话里是同一份数据的可交互卡片。数据只存在本机，不联网、不调用模型。",
+  "icon": "./icon.svg",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "what-to-eat",
+    "today-menu",
+    "meal-roulette",
+    "meal-planner",
+    "home-cooking",
+    "panel"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dshcode2026/dsh-code/tree/main/plugins/dsh-what-to-eat",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dshcode2026/dsh-code.git",
+    "directory": "plugins/dsh-what-to-eat"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "locale",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "test": "node test/engine.test.mjs && node test/host.integration.mjs && node test/midnight.integration.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    },
+    "compatibility": {
+      "dsh": ">=0.2.0-rc.1 <0.3.0-0",
+      "dshReleases": {
+        "0.2.1-rc.2": "compatible"
+      }
+    }
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}
