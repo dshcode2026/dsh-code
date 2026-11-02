@@ -12,7 +12,7 @@ window.__ModuleLoader__.load({
     const PANEL_ID = 'dsh-what-to-eat';
     const TAB_KIND = 'today-menu';
     // 每次改客户端就+1：diag 里能直接看出页面加载的是哪一版，避免「刷新了但拿的是缓存」。
-    const BUILD_TAG = 'b24';
+    const BUILD_TAG = 'b25';
     // 跨组件的小引用：卡片点菜名时用它把侧栏面板打开。
     const uiRefs = { openPanel: null };
 
@@ -52,6 +52,8 @@ window.__ModuleLoader__.load({
       'card.today': '今日已抽',
       'card.none': '今天还没有抽取。到点会自动出现，也可以在时间表里改时间。',
       'card.reroll': '换一道',
+      'card.show': '显示卡片',
+      'card.showHint': '把被关掉的浮动卡片重新放到屏幕上',
       'card.guide': '看攻略',
       'card.openPanel': '点菜名或「面板」按钮打开今日美食面板',
       'card.panelButton': '面板',
@@ -163,6 +165,8 @@ window.__ModuleLoader__.load({
       'card.today': 'Picked today',
       'card.none': 'Nothing picked yet today.',
       'card.reroll': 'Another',
+      'card.show': 'Show card',
+      'card.showHint': 'Bring the dismissed floating card back on screen',
       'card.guide': 'Open guide',
       'card.openPanel': 'Click the dish name or the Panel button to open the Today’s Menu panel',
       'card.panelButton': 'Panel',
@@ -523,6 +527,8 @@ window.__ModuleLoader__.load({
     }
 
     // ── 今天 ─────────────────────────────────────────────
+    const CARD_SHOW_EVENT = 'what-to-eat:show-card';
+
     function TodayTab({ data }) {
       const [busy, setBusy] = React.useState(false);
       const card = data.card && !data.card.hidden ? data.card : null;
@@ -539,6 +545,19 @@ window.__ModuleLoader__.load({
           setBusy(false);
         }
       };
+      // 卡片被 × 掉后，从面板这里把它叫回来（清掉本机「已关闭」标记并通知卡片重挂）
+      const showCard = () => {
+        try {
+          if (card?.id) localStorage.removeItem(`what-to-eat.dismissed.${card.id}`);
+        } catch {
+          /* ignore */
+        }
+        try {
+          window.dispatchEvent(new CustomEvent(CARD_SHOW_EVENT));
+        } catch {
+          /* ignore */
+        }
+      };
       return h(
         'div',
         null,
@@ -548,7 +567,12 @@ window.__ModuleLoader__.load({
           { className: 'tm-block' },
           h('div', { className: 'tm-row tm-between' },
             h('span', { className: 'tm-label' }, T('card.today')),
-            h(Btn, { small: true, onClick: reroll, disabled: busy || !card }, T('card.reroll')),
+            h(
+              'div',
+              { className: 'tm-actions', style: { margin: 0 } },
+              h(Btn, { small: true, onClick: showCard, disabled: !card, title: T('card.showHint') }, T('card.show')),
+              h(Btn, { small: true, onClick: reroll, disabled: busy || !card }, T('card.reroll')),
+            ),
           ),
           card
             ? h(
@@ -1510,6 +1534,20 @@ window.__ModuleLoader__.load({
       const [busy, setBusy] = React.useState(false);
       const cardRef = React.useRef(null);
       const dragRef = React.useRef(null);
+
+      // 面板里点「显示卡片」时，把这张卡重新叫回来（清掉「已关闭」标记）
+      React.useEffect(() => {
+        const show = () => {
+          try {
+            if (card?.id) localStorage.removeItem(`what-to-eat.dismissed.${card.id}`);
+          } catch {
+            /* ignore */
+          }
+          setDismissed(false);
+        };
+        window.addEventListener(CARD_SHOW_EVENT, show);
+        return () => window.removeEventListener(CARD_SHOW_EVENT, show);
+      }, [card?.id]);
 
       React.useEffect(() => {
         if (!card) return;
