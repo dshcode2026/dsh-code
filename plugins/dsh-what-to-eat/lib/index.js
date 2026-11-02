@@ -1,4 +1,4 @@
-// 今日菜单 · Host 半侧
+// 今日美食 · Host 半侧
 // 负责：数据持久化、抽取调度、HTTP 数据接口。不调用模型、不抓取外部内容、不新建会话。
 
 import { randomUUID } from 'node:crypto';

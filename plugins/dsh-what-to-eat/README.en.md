@@ -8,7 +8,7 @@ Draws one home-cooked dish from a **local** library at the times you configure, 
 
 ## After install
 
-1. A **Today's Menu** tab appears in the right sidebar (opened once on first install; reopen it from the sidebar `+` menu later).
+1. A **Today's Menu** tab appears in the right sidebar (use the card's **Panel** button to open it; reopen it later from the sidebar `+` menu).
 2. Three default slots: breakfast 07:30, lunch 11:40, dinner 17:40, every day.
 3. When a slot fires, a card appears above the composer: dish name + tags, method expandable; in mode ② it also shows an **Open guide** button.
 

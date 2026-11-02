@@ -1,4 +1,4 @@
-// 今日菜单 · Client 半侧
+// 今日美食 · Client 半侧
 // 两个视图共用同一个 store：右侧栏常驻面板 + 会话输入框上方的卡片。
 // 卡片是视图，不向会话日志写任何事件。
 
@@ -12,13 +12,13 @@ window.__ModuleLoader__.load({
     const PANEL_ID = 'dsh-what-to-eat';
     const TAB_KIND = 'today-menu';
     // 每次改客户端就+1：diag 里能直接看出页面加载的是哪一版，避免「刷新了但拿的是缓存」。
-    const BUILD_TAG = 'b23';
+    const BUILD_TAG = 'b24';
     // 跨组件的小引用：卡片点菜名时用它把侧栏面板打开。
     const uiRefs = { openPanel: null };
 
     // ── 文案 ─────────────────────────────────────────────
     const ZH = {
-      'panel.title': '今日菜单',
+      'panel.title': '今日美食',
       'panel.guide': '按你设置的时间，从菜库里随机抽一道菜',
       'tab.today': '今天',
       'tab.library': '菜库',
@@ -53,7 +53,7 @@ window.__ModuleLoader__.load({
       'card.none': '今天还没有抽取。到点会自动出现，也可以在时间表里改时间。',
       'card.reroll': '换一道',
       'card.guide': '看攻略',
-      'card.openPanel': '点菜名或「面板」按钮打开今日菜单面板',
+      'card.openPanel': '点菜名或「面板」按钮打开今日美食面板',
       'card.panelButton': '面板',
       'card.hideToEdge': '收到边上去（点边条可再展开）',
       'card.expand': '点一下展开',
